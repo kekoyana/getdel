@@ -3,6 +3,8 @@ version: '3'
 services:
   app:
     build: .
-    tty: true
+    ports:
+      - "${WEB_PORT:-1323}:1323"
     volumes:
       - .:/work:cached
+    command: "ash -c /work/run.sh"

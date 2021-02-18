@@ -7,4 +7,3 @@ RUN mkdir /work
 WORKDIR /work
 
 ADD . /work
-
