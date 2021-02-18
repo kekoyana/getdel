@@ -6,6 +6,8 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 type Template struct {
