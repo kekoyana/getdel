@@ -5,5 +5,3 @@ RUN go env -w GO111MODULE=on
 
 RUN mkdir -p /usr/local/go/src/getdel
 WORKDIR /usr/local/go/src/getdel
-
-ADD . /usr/local/go/src/getdel

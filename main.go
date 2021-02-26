@@ -20,27 +20,28 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 
 func getTweet(c echo.Context) error {
 	conn := db.DbConn()
+	tweet := db.Tweet{}
+	conn.Create(&tweet)
 	Tweets := []db.Tweet{}
 	conn.Order("id desc").Find(&Tweets)
 	return c.Render(http.StatusOK, "index", Tweets)
 }
 
 func postTweet(c echo.Context) error {
-	data := struct {
-		Message string
-	}{
-		Message: "にゃーん",
-	}
-	return c.Render(http.StatusOK, "index", data)
+	conn := db.DbConn()
+	tweet := db.Tweet{}
+	//tweet.Message = c.FormValue("body")
+	tweet.Message = "Hoge"
+	conn.Create(&tweet)
+	return c.Redirect(http.StatusFound, "/")
 }
 
 func delTweet(c echo.Context) error {
-	data := struct {
-		Message string
-	}{
-		Message: "にゃーん",
-	}
-	return c.Render(http.StatusOK, "index", data)
+	conn := db.DbConn()
+	tweet := db.Tweet{}
+	conn.First(&tweet)
+	conn.Delete(&tweet)
+	return c.Redirect(http.StatusFound, "/")
 }
 
 func main() {
@@ -53,7 +54,7 @@ func main() {
 	e := echo.New()
 	e.Renderer = t
 	e.GET("/", getTweet)
-	e.GET("/post", getTweet)
+	e.GET("/post", postTweet)
 	e.GET("/del", delTweet)
 	e.Logger.Fatal(e.Start(":1323"))
 }
