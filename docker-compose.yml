@@ -7,4 +7,4 @@ services:
       - "${WEB_PORT:-1323}:1323"
     volumes:
       - .:/work:cached
-    command: "ash -c /work/run.sh"
+    command: "ash -c /usr/local/go/src/getdel/run.sh"

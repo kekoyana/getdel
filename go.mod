@@ -1,4 +1,4 @@
-module getdel
+module github.com/kekoyana/getdel
 
 go 1.15
 
